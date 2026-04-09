@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafío MELI - Protocolo de Seguridad</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #E5E7EB;
+        }
+        .meli-yellow { background-color: #FFE600; }
+        .meli-dark { background-color: #333333; }
+        .stamp {
+            transform: rotate(-15deg);
+            border: 4px solid #EF4444;
+            color: #EF4444;
+            font-weight: 900;
+            padding: 8px 16px;
+            display: inline-block;
+            border-radius: 4px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+        .scanline {
+            background: linear-gradient(to bottom, transparent, rgba(255, 230, 0, 0.1), transparent);
+            height: 4px;
+            width: 100%;
+            position: absolute;
+            animation: scan 3s linear infinite;
+        }
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        @media print {
+            body {
+                background-color: #E5E7EB;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .scanline { display: none; }
+            .animate-pulse { animation: none; }
+            @page {
+                margin: 0.5cm;
+                size: A4;
+            }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-10 flex justify-center items-center min-h-screen">
+
+    <div class="max-w-3xl w-full meli-yellow shadow-2xl rounded-xl overflow-hidden border-8 border-white relative">
+        <div class="scanline"></div>
+
+        <!-- Header -->
+        <div class="meli-dark p-6 text-white flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-black tracking-tighter italic">MERCADO LIBRE <span class="text-yellow-400">FULL</span></h1>
+                <p class="text-xs opacity-70 mt-1 uppercase tracking-widest">Sistemas de Gestión de Almacén v.4.0.2</p>
+            </div>
+            <div class="text-right">
+                <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded animate-pulse">
+                    SISTEMA BLOQUEADO
+                </span>
+            </div>
+        </div>
+
+        <!-- Body -->
+        <div class="p-8 space-y-8">
+            <!-- Message -->
+            <div class="bg-white/50 p-4 border-l-4 border-black italic">
+                <p class="text-lg font-bold text-gray-800">
+                    "¡Alerta de Sistema! Se han detectado errores críticos en el etiquetado de la última milla. Solo los equipos que sigan el protocolo de seguridad podrán liberar el flujo hacia el Sobre 2."
+                </p>
+            </div>
+
+            <!-- Rules Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Rule 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border-b-4 border-gray-300">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-8 h-8 rounded-full meli-dark text-white flex items-center justify-center font-bold">1</div>
+                        <h2 class="font-black uppercase text-sm">Prefijo Obligatorio</h2>
+                    </div>
+                    <p class="text-2xl font-mono tracking-widest text-blue-700">MLC</p>
+                    <p class="text-xs text-gray-500 mt-2">Debe ser el inicio exacto de cada cadena de datos.</p>
+                </div>
+
+                <!-- Rule 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border-b-4 border-gray-300">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-8 h-8 rounded-full meli-dark text-white flex items-center justify-center font-bold">2</div>
+                        <h2 class="font-black uppercase text-sm">Extensión de Datos</h2>
+                    </div>
+                    <p class="text-2xl font-mono tracking-widest text-blue-700">10 DÍGITOS</p>
+                    <p class="text-xs text-gray-500 mt-2">Ni uno más, ni uno menos después del prefijo.</p>
+                </div>
+
+            </div>
+
+            <!-- Category Rules -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border-b-4 border-gray-300 relative overflow-hidden">
+                <div class="stamp absolute top-4 right-4">Confidencial</div>
+
+                <h2 class="font-black uppercase text-sm mb-4 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.040L3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622l-.382-3.016z" />
+                    </svg>
+                    Dígito Verificador de Categoría
+                </h2>
+
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between border-b pb-2">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">🏷️</span>
+                            <span class="font-bold">FASHION</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="bg-gray-100 px-3 py-1 rounded-md font-mono font-bold text-lg">PAR [2, 4, 6, 8]</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between border-b pb-2">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">🧸</span>
+                            <span class="font-bold">TOYS</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="bg-gray-100 px-3 py-1 rounded-md font-mono font-bold text-lg">IMPAR [1, 3, 5, 7, 9]</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">🎧</span>
+                            <span class="font-bold">ELECTRONICS (CE)</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="bg-gray-800 text-white px-3 py-1 rounded-md font-mono font-bold text-lg text-yellow-400">SIEMPRE 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warning Footer -->
+            <div class="text-center space-y-2">
+                <p class="text-[10px] text-gray-600 uppercase tracking-widest font-bold">
+                    Analice el reporte de incidencias adjunto en este sobre para encontrar el ID corrupto.
+                </p>
+                <div class="flex justify-center gap-1">
+                    <div class="h-8 w-1 bg-black"></div>
+                    <div class="h-8 w-2 bg-black"></div>
+                    <div class="h-8 w-1 bg-black"></div>
+                    <div class="h-8 w-4 bg-black"></div>
+                    <div class="h-8 w-1 bg-black"></div>
+                    <div class="h-8 w-2 bg-black"></div>
+                    <div class="h-8 w-6 bg-black"></div>
+                    <div class="h-8 w-1 bg-black"></div>
+                </div>
+                <p class="text-[9px] font-mono text-gray-500 uppercase">Ref: PROTOCOL_ERROR_ID_RECOVERY_429</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

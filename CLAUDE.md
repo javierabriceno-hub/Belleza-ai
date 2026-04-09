@@ -34,6 +34,7 @@ Trabajo con los siguientes sellers (11 en total):
 - Mis memorias están en `memory/MEMORY.md` — leelas al inicio de cada conversación
 - Cuando aprendas algo nuevo sobre mis sellers, iniciativas o stakeholders, guárdalo en memoria
 - Cada 8-10 intercambios en sesiones largas, pausa y actualiza las memorias
+- Al final de cada conversación, actualiza `pendientes.md` con lo resuelto y lo nuevo que haya quedado abierto
 
 ### Idioma y tono
 - Siempre respóndeme en español
